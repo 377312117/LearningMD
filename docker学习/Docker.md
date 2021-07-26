@@ -96,7 +96,7 @@ uname -r # 查看linux内核版本， 安装docker需内核3.10以上
 
 使用**虚拟机**运行多个相互隔离的应用时，如下图:
 
-<img src="C:\Users\Administrator\Documents\工作文档\容器.jpg" alt="容器" style="zoom:67%;" />
+![image-20210726220539897](C:\Users\Administrator\Documents\工作文档\docker学习\image-20210726220539897.png)
 
 **从下到上理解上图:**
 
@@ -110,7 +110,7 @@ uname -r # 查看linux内核版本， 安装docker需内核3.10以上
 
 使用**Docker容器**运行多个相互隔离的应用时，如下图:
 
-<img src="C:\Users\Administrator\Documents\工作文档\容器.jpg" alt="容器" style="zoom:67%;" />
+![image-20210726220606542](C:\Users\Administrator\Documents\工作文档\docker学习\image-20210726220606542.png)
 
 不难发现，相比于**虚拟机**，**Docker**要简洁很多。因为我们不需要运行一个臃肿的**客户机操作系统**了。
 
@@ -147,6 +147,20 @@ Docker有着小巧、迁移部署快速、运行高效等特点，但隔离性�
 ![image-20210721215345291](C:\Users\Administrator\Documents\工作文档\docker学习\image-20210721215345291.png)
 
 ## docker安装步骤
+
+### 自动安装（推荐）：
+
+使用官方安装脚本自动安装安装命令如下：
+
+```shell
+curl -fsSL https://get.docker.com | bash -s docker --mirror aliyun
+```
+
+也可以使用国内 daocloud 一键安装命令：
+
+```shell
+curl -sSL https://get.daocloud.io/docker | sh
+```
 
 ```shell
 #1.卸载
@@ -197,6 +211,48 @@ yum makecache fast
 ## docker基本命令
 
 ![image-20210721220014801](C:\Users\Administrator\Documents\工作文档\docker学习\image-20210721220014801.png)
+
+### 命令汇总
+
+```shell
+attach    Attach to a running container #当前she11下attach 连接指定运行镜像
+build     Build an image from a Dockerfile #通过Dockerfile 定制镜像
+commit    Create a new image from a container changes #提交当前容器为新的镜像
+cp Copy   files/folders from the containers filesystem to the host path #从容器中拷贝指定文件或者目录到宿主机中
+create    Create a new container #创建一个新的容器，同run，但不启动容器
+diff      Inspect changes on a container's fi lesystem #查看docker容器变化
+events    Get rea1 time events from the server #从docker服务获取容器实时事件
+exec      Run a command in an existing container #在已存在的容器上运行命令
+export    Stream the contents of a container as a tar archive #导出容器的内容流作为一个tar归档文件[对应import ]
+history   Show the history of an image #展示一个镜像形成历史
+images    List images #列出系统当前镜像
+import    Create a new filesystem image from the contents of a tarba11 #从tar包 中的内容创建一个新的文件系统映像[对应export]
+info      Disp1ay sys tem-wide information #显示系统相关信息
+inspect   Return 1ow-leve1 information on a container #查看容器详细信息
+kill      Kill a running container  # ki11 指定docker 容器
+load      Load an image from a tar archive #从一个tar包中加载-一个镜像[对应save] 
+login     Register or Login to the docker registry server  #注册或者登陆一个docker源服务器
+logout    Log out from a Docker registry server    #从当前Docker registry 退出
+1ogs      Fetch the logs of a container     #输出当前容器日志信息
+port      Lookup the pub1ic- facing port which is NAT-ed to PRIVATE_ PORT  #查看映射端口对应的容器内部源端
+pause     Pause all processes within a container  #暂停容器
+PS        List containers   #列出容器列表
+pull      Pu11 an image or a repository from the docker registry server  #从docker镜像源服务器拉取指定镜像或者库镜像
+push      Push an image or a repository to the docker registry server    #推送指定镜像或者库镜像至docker源服务器
+restart   Restart a running container  #重启运行的容器
+rm        Remove one or more containers  #移除一个或者多个容器
+rmi       Remove one or more i mages   #移除一个或多个镜像[无容器使用该镜像才可删除，否则需删除相关容器
+run       Run a command in a new container  #创建一个新的容器并运行一个命令
+save      Save an image to a tar archive   #保存一个镜像为一个tar包[对应load]
+search    Search for an image on the Docker Hub  #在dockerhub中搜索镜像
+start     Start a stopped containers  #启动容器
+stop      Stop a running containers  #停止容器
+tag       Tag an image into a repository  #给源中镜像打标签
+top       Lookup the running processes of a container  #查看容器中运行的进程信息
+unpause   Unpause a paused container  #取消暂停容器
+version   Show the docker version informati on  #查看docker 版本号
+wait      B1ock until a container stops， then print its exit code    #阻塞运行直到容器停止运行，然后打印退出的代码
+```
 
 ### docker的帮助文档
 
@@ -393,48 +449,6 @@ docker attach  <容器id>
 在主机上执行命令： docker cp <容器id><:文件路径> <主机路径>  # 无论这个容器是否正在运行
 ```
 
-### 命令汇总
-
-```shell
-attach    Attach to a running container #当前she11下attach 连接指定运行镜像
-build     Build an image from a Dockerfile #通过Dockerfile 定制镜像
-commit    Create a new image from a container changes #提交当前容器为新的镜像
-cp Copy   files/folders from the containers filesystem to the host path #从容器中拷贝指定文件或者目录到宿主机中
-create    Create a new container #创建一个新的容器，同run，但不启动容器
-diff      Inspect changes on a container's fi lesystem #查看docker容器变化
-events    Get rea1 time events from the server #从docker服务获取容器实时事件
-exec      Run a command in an existing container #在已存在的容器上运行命令
-export    Stream the contents of a container as a tar archive #导出容器的内容流作为一个tar归档文件[对应import ]
-history   Show the history of an image #展示一个镜像形成历史
-images    List images #列出系统当前镜像
-import    Create a new filesystem image from the contents of a tarba11 #从tar包 中的内容创建一个新的文件系统映像[对应export]
-info      Disp1ay sys tem-wide information #显示系统相关信息
-inspect   Return 1ow-leve1 information on a container #查看容器详细信息
-kill      Kill a running container  # ki11 指定docker 容器
-load      Load an image from a tar archive #从一个tar包中加载-一个镜像[对应save] 
-login     Register or Login to the docker registry server  #注册或者登陆一个docker源服务器
-logout    Log out from a Docker registry server    #从当前Docker registry 退出
-1ogs      Fetch the logs of a container     #输出当前容器日志信息
-port      Lookup the pub1ic- facing port which is NAT-ed to PRIVATE_ PORT  #查看映射端口对应的容器内部源端
-pause     Pause all processes within a container  #暂停容器
-PS        List containers   #列出容器列表
-pull      Pu11 an image or a repository from the docker registry server  #从docker镜像源服务器拉取指定镜像或者库镜像
-push      Push an image or a repository to the docker registry server    #推送指定镜像或者库镜像至docker源服务器
-restart   Restart a running container  #重启运行的容器
-rm        Remove one or more containers  #移除一个或者多个容器
-rmi       Remove one or more i mages   #移除一个或多个镜像[无容器使用该镜像才可删除，否则需删除相关容器
-run       Run a command in a new container  #创建一个新的容器并运行一个命令
-save      Save an image to a tar archive   #保存一个镜像为一个tar包[对应load]
-search    Search for an image on the Docker Hub  #在dockerhub中搜索镜像
-start     Start a stopped containers  #启动容器
-stop      Stop a running containers  #停止容器
-tag       Tag an image into a repository  #给源中镜像打标签
-top       Lookup the running processes of a container  #查看容器中运行的进程信息
-unpause   Unpause a paused container  #取消暂停容器
-version   Show the docker version informati on  #查看docker 版本号
-wait      B1ock until a container stops， then print its exit code    #截取容器停止时的退出状态值
-```
-
 ### 示例
 
 #### 示例1： 部署nginx
@@ -443,7 +457,7 @@ wait      B1ock until a container stops， then print its exit code    #截取�
 
 ```shell
 docker pull nginx
-docker run -d --name nginx01 -p 3344:80 nginx  # 3344是外部暴露的端口好，80容器内部运行的nginx的端口号.nginx01是对容器的命名
+docker run -d --name nginx01 -p 3344:80 nginx  # 3344是外部暴露的端口号，80容器内部运行的nginx的端口号.nginx01是对容器的命名
 # 进入容器内部查看
 docker ps
 docker exec -it <nginx01容器id> /bin/bash
@@ -457,8 +471,7 @@ docker run -it --rm tomcat:9.0 # 官方提供的用完即删模式
 docker pull tomcat
 docker run -d --name tomcat01 -p 3344:80 tomcat
 # 测试访问没有问题，但是进入容器后少了linux 命令,是因为阿里云镜像的原因，默认最小镜像，将所有不必要的都剔除了，保证了最小可运行环境
-
-拓展：tomcat和nginx的区别：https://www.zhihu.com/question/32212996
+# 拓展：tomcat和nginx的区别：https://www.zhihu.com/question/32212996
 ```
 
 #### 示例3： 部署ES
@@ -560,7 +573,7 @@ docker run -it -v /virus/test:/home centos /bin/bash
 ```shell
 docker run -d -p 3310:3306  -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 --name mysql_zzx mysql:5.7
 
-注：数据库映射出来了，就算容器被删除也不会删除数据，挂载后宿主机操作映射的路径文件夹和宿主机上的文件夹是双向同步的
+# 注：数据库映射出来了，就算容器被删除也不会删除数据，挂载后宿主机操作映射的路径文件夹和宿主机上的文件夹是双向同步的
 ```
 
 ### 具名挂载和匿名挂载
@@ -589,8 +602,8 @@ docker run -d -p 3310:3306  -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql
 #拓展1：修改读写权限
 docker run -d -P --name nginx03 -v juming-nginx:/etc/nginx:ro nginx
 
-ro : read only
-rw : 可读可写（默认）
+# ro : read only
+# rw : 可读可写（默认）
 #拓展2: 所有的容器数据卷未指定目录都在/var/lib/docker/volumes/<数据卷名>/_data下
 ```
 
@@ -747,7 +760,7 @@ CMD /usr/local/apache-tomcat-9. 0.22/bin/startup.sh && tail -F /url/local/apache
 
 3.在服务器提交自己的镜像（push）
 
-```
+```shell
 docker login -u qe377312117
 enter password>
 # 新增一个tag,自己发布的最好都需要打上tag，镜像前需要带上自己的account
@@ -890,7 +903,7 @@ redis-cli --cluster create 172.38.0.11:6379 172.38.0.12:6379 172.38.0.13:6379 17
 
 ### 定义
 
- 		使用 Docker Compose 可以轻松、高效的管理容器，它是一个用于定义和运行多容器 Docker 的应用程序工具
+​	使用 Docker Compose 可以轻松、高效的管理容器，它是一个用于定义和运行多容器 Docker 的应用程序工具
 
 ### 安装
 
@@ -931,7 +944,7 @@ version：指定 docker-compose.yml 文件的写法格式
 services：多个容器集合
 build：配置构建时，Compose 会利用它自动构建镜像，该值可以是一个路径，也可以是一个对象，用于指定 Dockerfile 参数
 
-```xml
+```yml
 build: ./dir
 ---------------
 build:
@@ -943,7 +956,7 @@ build:
 
 - **command**：覆盖容器启动后默认执行的命令
 
-```xml
+```yml
 command: bundle exec thin -p 3000
 ----------------------------------
 command: [bundle,exec,thin,-p,3000]
@@ -951,7 +964,7 @@ command: [bundle,exec,thin,-p,3000]
 
 - **dns**：配置 dns 服务器，可以是一个值或列表
 
-```xml
+```yml
 dns: 8.8.8.8
 ------------
 dns:
@@ -1002,7 +1015,7 @@ mvn clean package
 
 - 在 jar 包所在路径创建 Dockerfile 文件，添加以下内容
 
-```bash
+```dockerfile
 FROM java:8
 VOLUME /tmp
 ADD docker-demo-0.0.1-SNAPSHOT.jar app.jar
@@ -1013,7 +1026,7 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app.jar"]
 
 - 在 jar 包所在路径创建文件 docker-compose.yml，添加以下内容
 
-```bash
+```yml
 version: '2' # 表示该 Docker-Compose 文件使用的是 Version 2 file
 services:
   docker-demo:  # 指定服务名称
@@ -1024,7 +1037,7 @@ services:
 
 - 在 docker-compose.yml 所在路径下执行该命令 Compose 就会自动构建镜像并使用镜像启动容器
 
-```cpp
+```shell
 docker-compose up
 docker-compose up -d  # 后台启动并运行容器
 ```
